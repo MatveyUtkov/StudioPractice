@@ -2,9 +2,509 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <title>Projects</title>
+    <style>
+        .main-container {
+            background-color: #000000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .hero-section {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+            min-height: 1024px;
+            width: 100%;
+            align-items: center;
+            padding: 0;
+        }
+
+        @media (max-width: 991px) {
+            .hero-section {
+                max-width: 100%;
+            }
+        }
+
+        .hero-background {
+            position: absolute;
+            inset: 0;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
+            padding: 0;
+        }
+        .header {
+            position: relative;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+            flex-wrap: wrap;
+            backdrop-filter: blur(5px);
+            background-color: rgba(17, 17, 17, 0.85);
+            align-self: stretch;
+            display: flex;
+            width: 100%;
+            font-size: 24px;
+            font-weight: 700;
+            padding: 1px 60px;
+        }
+
+        @media (max-width: 991px) {
+            .header {
+                max-width: 100%;
+                padding: 0 20px;
+            }
+        }
+
+        .header-content {
+            display: flex;
+            width: 100%;
+            max-width: 1377px;
+            gap: 5px;
+        }
+
+        @media (max-width: 991px) {
+            .header-content {
+                max-width: 100%;
+                flex-wrap: wrap;
+            }
+        }
+
+        .logo {
+            color: #fff;
+            font-family: Public Sans, sans-serif;
+            letter-spacing: 3.6px;
+            flex-grow: 0;
+            flex-basis: auto;
+            align-content: center;
+            align-self: center;
+        }
+
+        .navigation {
+            justify-content: center;
+            display: flex;
+            gap: 0;
+            color: #9a9a9a;
+            text-align: center;
+            text-transform: uppercase;
+            line-height: 83%;
+            flex-grow: 1;
+            flex-basis: auto;
+        }
+
+        @media (max-width: 991px) {
+            .navigation {
+                max-width: 100%;
+                flex-wrap: wrap;
+            }
+        }
+
+        .nav-link {
+            font-family: Public Sans, sans-serif;
+            justify-content: center;
+            align-items: center;
+            white-space: nowrap;
+            padding: 32px 60px;
+            background: none;
+            border: none;
+            color: inherit;
+            font: inherit;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background-color: #F2CA5C;
+            transition: height 0.3s ease;
+            z-index: -1;
+        }
+
+        .nav-link:hover::before {
+            height: 100%;
+        }
+
+        .nav-link:hover {
+            color: #ffffff;
+        }
+
+        @media (max-width: 991px) {
+            .nav-link {
+                white-space: initial;
+                padding: 0 20px;
+            }
+        }
+
+        .hero {
+            display: flex;
+            margin-top: 51px;
+            width: 100%;
+            max-width: 1632px;
+            align-items: center;
+            gap: 20px;
+            font-size: 64px;
+            font-weight: 700;
+            text-align: center;
+            text-transform: uppercase;
+            justify-content: space-between;
+            padding: 0 20px;
+            position: relative; /* Added */
+        }
+
+        @media (max-width: 991px) {
+            .hero {
+                max-width: 100%;
+                flex-wrap: wrap;
+                margin-top: 40px;
+                font-size: 40px;
+            }
+        }
+
+        .arrow-icon {
+            aspect-ratio: 0.54;
+            object-fit: fill;
+            object-position: center;
+            width: 86px;
+            align-self: stretch;
+            margin: auto 0;
+        }
+
+        .project-card {
+            display: flex;
+            flex-direction: column;
+            mix-blend-mode: luminosity;
+            filter: blur(2px);
+            overflow: hidden;
+            align-self: stretch;
+            position: relative;
+            min-height: 727px;
+            padding: 69px 80px;
+        }
+
+        @media (max-width: 991px) {
+            .project-card {
+                max-width: 100%;
+                font-size: 40px;
+                padding: 0 20px;
+            }
+        }
+
+        .project-image {
+            position: absolute;
+            inset: 0;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .project-title {
+            position: relative;
+            color: #f2ca5c;
+            text-shadow: 5px 4px 1.8px rgba(0, 0, 0, 0.5);
+            font-family: K2D, sans-serif;
+            line-height: 51%;
+            align-self: center;
+        }
+
+        @media (max-width: 991px) {
+            .project-title {
+                max-width: 100%;
+                font-size: 40px;
+            }
+        }
+
+        .project-description {
+            position: relative;
+            color: #fff;
+            text-shadow: 7px 4px 4px rgba(0, 0, 0, 0.4);
+            font-family: Inter, sans-serif;
+            line-height: 54px;
+            margin-top: 35px;
+        }
+
+        @media (max-width: 991px) {
+            .project-description {
+                max-width: 100%;
+                font-size: 40px;
+                line-height: 37px;
+            }
+        }
+
+        .pagination {
+            display: flex;
+            margin-top: 54px;
+            gap: 5px;
+            padding: 0 20px;
+            alignment: center;
+        }
+
+        @media (max-width: 991px) {
+            .pagination {
+                margin-top: 40px;
+            }
+        }
+
+        .pagination-dot {
+            background-color: #d9d9d9;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+        }
+
+        .pagination-dot.active {
+            background-color: #d9d9d9;
+        }
+
+        .pagination-dot.inactive {
+            background-color: rgba(217, 217, 217, 0.5);
+        }
+
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .hero-title {
+            position: relative;
+            color: #fff;
+            text-align: center;
+            text-transform: uppercase;
+            margin-top: 26px;
+            font: 1000 60px/100% SF Pro, sans-serif; /* Decreased font size */
+        }
+
+        @media (max-width: 991px) {
+            .hero-title {
+                max-width: 100%;
+                font-size: 24px;
+            }
+        }
+
+        .hero-subtitle {
+            position: relative;
+            color: #f2ca5c;
+            text-align: center;
+            text-transform: uppercase;
+            margin-top: 50px; /* Adjusted margin top */
+            font: 700 40px/1.2 Inter, sans-serif; /* Decreased font size and adjusted line height */
+        }
+
+        @media (max-width: 991px) {
+            .hero-subtitle {
+                max-width: 100%;
+                margin-top: 20px; /* Adjusted margin top */
+                font-size: 24px;
+                line-height: 1.1; /* Adjusted line height */
+            }
+        }
+        .divider {
+            position: relative;
+            border: 0 solid #000;
+            background-color: #fff;
+            align-self: stretch;
+            min-height: 2px;
+            margin-top: 48px;
+            width: 100%;
+        }
+
+        @media (max-width: 991px) {
+            .divider {
+                max-width: 100%;
+                margin-top: 40px;
+            }
+        }
+
+        .cta-section {
+            position: relative;
+            width: 100%;
+            max-width: 1824px;
+            margin: 124px 0 42px;
+        }
+
+        @media (max-width: 991px) {
+            .cta-section {
+                max-width: 100%;
+                margin: 40px 0;
+            }
+        }
+
+        .cta-container {
+            gap: 20px;
+            display: flex;
+        }
+
+        @media (max-width: 991px) {
+            .cta-container {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0;
+            }
+        }
+
+        .cta-column {
+            display: flex;
+            flex-direction: column;
+            line-height: normal;
+            width: 50%;
+            margin-left: 0;
+        }
+
+        @media (max-width: 991px) {
+            .cta-column {
+                width: 100%;
+            }
+        }
+
+        .cta-button {
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            flex-grow: 1;
+            color: #000;
+            text-align: center;
+            text-transform: uppercase;
+            width: 100%;
+            padding: 87px 60px 80px;
+            font: 700 52px/38% Inter, sans-serif;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button-primary {
+            background-color: rgba(255, 255, 255, 0.75);
+        }
+
+        .cta-button-primary:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .cta-button-secondary {
+            background-color: rgba(242, 202, 92, 0.75);
+            white-space: nowrap;
+        }
+
+        .cta-button-secondary:hover {
+            background-color: rgba(242, 202, 92, 0.9);
+        }
+
+        @media (max-width: 991px) {
+            .cta-button {
+                max-width: 100%;
+                font-size: 40px;
+                margin-top: 40px;
+                padding: 0 20px;
+            }
+
+            .cta-button-secondary {
+                white-space: initial;
+            }
+        }
+        .hero-background {
+            position: center;
+            inset: 0;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
+            padding: 0;
+            margin-top: 100px;
+        }
+        .mySlides {display:none}
+        .w3-left, .w3-right, .w3-badge {cursor:pointer}
+        .w3-badge {height:13px;width:13px;padding:0}
+    </style>
 </head>
 <body>
 
+<main class="main-container">
+    <section class="hero-section">
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">AITU MEDIA STUDIO</div>
+                <nav class="navigation">
+                    <button class="nav-link">ПРОЕКТЫ</button>
+                    <button class="nav-link">СТУДИЯ</button>
+                    <button class="nav-link">О НАС</button>
+                    <button class="nav-link">КОНТАКТЫ</button>
+                </nav>
+            </div>
+        </header>
+        <div class="hero-section">
+            <div class="mySlides" >
+                <img class="hero-background" src="https://cdn.builder.io/api/v1/image/assets/TEMP/603429e94f77452f84fb21aaddb9d02d0f21329a6a0d82db80e8c4360af3babb?apiKey=326253b6660e43b19fe75dd9e280980a&" style="width:100%">
+                <h1 class="hero-title">GDA MEDIA</h1>
+                <h2 class="hero-subtitle">Подкасты</h2>
+                <h2 class="hero-subtitle">И стримы</h2>
+                <iframe  src="https://www.youtube.com/embed/9Irz0c-6UGw" frameborder="0" allowfullscreen></iframe>
+
+            </div>
+            <div class="mySlides">
+                <img class="hero-background" src="https://cdn.builder.io/api/v1/image/assets/TEMP/8f3deca1ccf6a530ce50a974c0b636bea1ae7044d75377c727b66a33809dea1b?apiKey=326253b6660e43b19fe75dd9e280980a&" style="width:100%">
+                <h1 class="hero-title">GDA MEDIA</h1>
+                <h2 class="hero-subtitle">Подкасты</h2>
+                <h2 class="hero-subtitle">И стримы</h2>
+            </div>
+            <div class="mySlides">
+                <img class="hero-background" src="https://cdn.builder.io/api/v1/image/assets/TEMP/603429e94f77452f84fb21aaddb9d02d0f21329a6a0d82db80e8c4360af3babb?apiKey=326253b6660e43b19fe75dd9e280980a&" style="width:100%">
+                <h1 class="hero-title">GDA MEDIA</h1>
+                <h2 class="hero-subtitle">Подкасты</h2>
+                <h2 class="hero-subtitle">И стримы</h2>
+            </div>
+            <div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
+                <div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
+                <div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
+                <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
+                <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
+                <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
+            </div>
+        </div>
+
+        <script>
+            var slideIndex = 1;
+            showDivs(slideIndex);
+
+            function plusDivs(n) {
+                showDivs(slideIndex += n);
+            }
+
+            function currentDiv(n) {
+                showDivs(slideIndex = n);
+            }
+
+            function showDivs(n) {
+                var i;
+                var x = document.getElementsByClassName("mySlides");
+                var dots = document.getElementsByClassName("demo");
+                if (n > x.length) {slideIndex = 1}
+                if (n < 1) {slideIndex = x.length}
+                for (i = 0; i < x.length; i++) {
+                    x[i].style.display = "none";
+                }
+                for (i = 0; i < dots.length; i++) {
+                    dots[i].className = dots[i].className.replace(" w3-white", "");
+                }
+                x[slideIndex-1].style.display = "block";
+                dots[slideIndex-1].className += " w3-white";
+            }
+        </script>
+
+
+
+    </section>
+</main>
 </body>
 </html>
