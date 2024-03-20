@@ -32,13 +32,12 @@
 
         .hero-background {
             position: absolute;
-            inset: 0;
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
-            object-position: center;
-            padding: 0;
+            height: auto;
+            min-width: 60%;
+            min-height: 100%;
+            width: auto;
         }
+
         .header {
             position: relative;
             justify-content: center;
@@ -160,7 +159,7 @@
             text-transform: uppercase;
             justify-content: space-between;
             padding: 0 20px;
-            position: relative; /* Added */
+            position: relative;
         }
 
         @media (max-width: 991px) {
@@ -421,11 +420,63 @@
             object-fit: cover;
             object-position: center;
             padding: 0;
-            margin-top: 100px;
         }
         .mySlides {display:none}
-        .w3-left, .w3-right, .w3-badge {cursor:pointer}
-        .w3-badge {height:13px;width:13px;padding:0}
+        .w3-left, .w3-right {
+            font-size: 30px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .w3-left {
+            left: 0;
+        }
+
+        .w3-right {
+            right: 0;
+        }
+        .booking_nav {
+            font-family: Public Sans, sans-serif;
+            justify-content: center;
+            align-items: center;
+            white-space: nowrap;
+            padding: 32px 60px;
+            background-color: #F2CA5C;
+            border: none;
+            color: inherit;
+            font: inherit;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .booking_nav::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            /* Removed background color definition from here */
+            transition: height 0.3s ease;
+            z-index: -1;
+        }
+
+        .booking_nav:hover::before {
+            height: 100%;
+        }
+
+        .booking_nav:hover {
+            color: #ffffff;
+        }
+
+        @media (max-width: 991px) {
+            .booking_nav {
+                white-space: initial;
+                padding: 0 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -440,22 +491,25 @@
                     <button class="nav-link">СТУДИЯ</button>
                     <button class="nav-link">О НАС</button>
                     <button class="nav-link">КОНТАКТЫ</button>
+                    <button class="booking_nav">ЗАЯВКА</button>
                 </nav>
             </div>
         </header>
         <div class="hero-section">
             <div class="mySlides" >
-                <img class="hero-background" src="https://cdn.builder.io/api/v1/image/assets/TEMP/603429e94f77452f84fb21aaddb9d02d0f21329a6a0d82db80e8c4360af3babb?apiKey=326253b6660e43b19fe75dd9e280980a&" style="width:100%">
+                <img class="hero-background" src="https://cdn.builder.io/api/v1/image/assets/TEMP/603429e94f77452f84fb21aaddb9d02d0f21329a6a0d82db80e8c4360af3babb?apiKey=326253b6660e43b19fe75dd9e280980a&"
+                     style="width:100%">
                 <h1 class="hero-title">GDA MEDIA</h1>
                 <h2 class="hero-subtitle">Подкасты</h2>
                 <h2 class="hero-subtitle">И стримы</h2>
-                <iframe  src="https://www.youtube.com/embed/9Irz0c-6UGw" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/9Irz0c-6UGw" frameborder="0" allowfullscreen width="1000" height="600"></iframe>
+
 
             </div>
             <div class="mySlides">
                 <img class="hero-background" src="https://cdn.builder.io/api/v1/image/assets/TEMP/8f3deca1ccf6a530ce50a974c0b636bea1ae7044d75377c727b66a33809dea1b?apiKey=326253b6660e43b19fe75dd9e280980a&" style="width:100%">
-                <h1 class="hero-title">GDA MEDIA</h1>
-                <h2 class="hero-subtitle">Подкасты</h2>
+                <h1 class="hero-title">Aitu podcast</h1>
+                <h2 class="hero-subtitle">Подкасты от айтаушников</h2>
                 <h2 class="hero-subtitle">И стримы</h2>
             </div>
             <div class="mySlides">
@@ -464,13 +518,14 @@
                 <h2 class="hero-subtitle">Подкасты</h2>
                 <h2 class="hero-subtitle">И стримы</h2>
             </div>
-            <div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
-                <div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
-                <div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
-                <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
-                <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
-                <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
+            <div class="w3-center w3-container w3-section w3-large w3-text-white">
+                <div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)" style="font-size: 40px;">&#10094;</div>
+                <div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)" style="font-size: 40px;">&#10095;</div>
+                <div class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></div>
+                <div class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></div>
+                <div class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></div>
             </div>
+
         </div>
 
         <script>
