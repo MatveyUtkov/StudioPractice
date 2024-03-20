@@ -12,6 +12,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            transition: background-color 0.5s ease;
         }
         .hero-section {
             display: flex;
@@ -22,6 +23,7 @@
             width: 100%;
             align-items: center;
             padding: 0;
+            transition: opacity 0.5s ease;
         }
 
         @media (max-width: 991px) {
@@ -477,6 +479,11 @@
                 padding: 0 20px;
             }
         }
+        body {
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.5s ease;
+        }
     </style>
 </head>
 <body>
@@ -487,11 +494,11 @@
             <div class="header-content">
                 <div class="logo">AITU MEDIA STUDIO</div>
                 <nav class="navigation">
-                    <button class="nav-link">ПРОЕКТЫ</button>
-                    <button class="nav-link">СТУДИЯ</button>
-                    <button class="nav-link">О НАС</button>
-                    <button class="nav-link">КОНТАКТЫ</button>
-                    <button class="booking_nav">ЗАЯВКА</button>
+                    <button class="nav-link"><a href="/projects"style="text-decoration:none;color: #9a9a9a">ПРОЕКТЫ</a></button>
+                    <button class="nav-link"><a href="/overview"style="text-decoration:none;color: #9a9a9a">СТУДИЯ</a></button>
+                    <button class="nav-link"><a href="/about"style="text-decoration:none;color: #9a9a9a">О НАС</a></button>
+                    <button class="nav-link"><a href="/contacts"style="text-decoration:none;color: #9a9a9a">КОНТАКТЫ</a></button>
+                    <button class="booking_nav"><a href="/booking"style="text-decoration:none;color: #9a9a9a">ЗАЯВКА </a></button>
                 </nav>
             </div>
         </header>
@@ -527,7 +534,7 @@
             </div>
 
         </div>
-
+        <script src="../server.js"></script>
         <script>
             var slideIndex = 1;
             showDivs(slideIndex);

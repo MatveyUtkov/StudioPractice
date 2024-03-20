@@ -282,6 +282,11 @@
             white-space: initial;
         }
     }
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
 </style>
 
 <main class="main-container">
@@ -291,10 +296,10 @@
             <div class="header-content">
                 <div class="logo">AITU MEDIA STUDIO</div>
                 <nav class="navigation">
-                    <button class="nav-link">ПРОЕКТЫ</button>
-                    <button class="nav-link">СТУДИЯ</button>
-                    <button class="nav-link">О НАС</button>
-                    <button class="nav-link">КОНТАКТЫ</button>
+                    <button class="nav-link"><a href="/projects" style="text-decoration:none; color: #9a9a9a" >ПРОЕКТЫ</a></button>
+                    <button class="nav-link"><a href="/overview" style="text-decoration:none;color: #9a9a9a" >СТУДИЯ</a></button>
+                    <button class="nav-link"><a href="/about" style="text-decoration:none;color: #9a9a9a">О НАС</a></button>
+                    <button class="nav-link"><a href="/contacts" style="text-decoration:none;color: #9a9a9a">КОНТАКТЫ</a></button>
                 </nav>
             </div>
         </header>
@@ -317,7 +322,7 @@
         </section>
     </section>
 </main>
-
+<script src="../server.js"></script>
 <script>
     function handleLearnMore() {
         // Handle learn more button click
