@@ -1,77 +1,80 @@
-// Import the required libraries
+
 const express = require('express');
-const morgan = require('morgan');
-const passport = require('passport');
-const { Client } = require('@microsoft/microsoft-graph-client');
-const config = require('./config.json');
-
-// Import the passport Azure AD library
-const BearerStrategy = require('passport-azure-ad').BearerStrategy;
-
-// Set the Azure AD B2C options
-const options = {
-    identityMetadata: `https://${config.credentials.tenantName}.b2clogin.com/${config.credentials.tenantName}.onmicrosoft.com/${config.policies.policyName}/${config.metadata.version}/${config.metadata.discovery}`,
-    clientID: config.credentials.clientID,
-    audience: config.credentials.clientID,
-    issuer: config.credentials.issuer,
-    policyName: config.policies.policyName,
-    isB2C: config.settings.isB2C,
-    scope: config.resource.scope,
-    validateIssuer: config.settings.validateIssuer,
-    loggingLevel: config.settings.loggingLevel,
-    passReqToCallback: config.settings.passReqToCallback
-}
-
-// Instantiate the passport Azure AD library with the Azure AD B2C options
-const bearerStrategy = new BearerStrategy(options, (token, done) => {
-    // Send user info using the second argument
-    done(null, {}, token);
-});
-
-// Use the required libraries
+const { URLSearchParams } = require('url');
+const msal = require('@azure/msal-node');
 const app = express();
 
-app.use(morgan('dev'));
+const clientId = '343ceba9-a004-42db-8e95-82ee7c2fd6da';
+const clientSecret1 = '6N18Q~Y2KTtdsQCZF0Vb-HvzThYuZ5RiZC7ttcbt';
+const tenantId = '158f15f3-83e0-4906-824c-69bdc50d9d61';
 
-app.use(passport.initialize());
-
-passport.use(bearerStrategy);
-
-//enable CORS (for testing only -remove in production/deployment)
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Authorization, Origin, X-Requested-With, Content-Type, Accept');
-    next();
-});
-
-// API anonymous endpoint
-app.get('/public', (req, res) => res.send({'date': new Date()}));
-
-// API protected endpoint
-app.get('/hello',
-    passport.authenticate('oauth-bearer', { session: false }),
-    async (req, res) => {
-        try {
-            const client = Client.init({
-                authProvider: (done) => {
-                    done(null, req.authInfo.access_token);
-                }
-            });
-
-            const result = await client.api('/me/planner/tasks').get();
-            console.log("EPTVAIMAT")
-            console.log(result)
-            res.status(200).json(result);
-        } catch (error) {
-            console.error('Error fetching Planner tasks:', error);
-            res.status(500).json({ error: 'Internal Server Error' });
+const redirectUri = 'https://localhost:3000/auth/callback';
+const scopes = ['https://graph.microsoft.com/.default'];
+const msalConfig = {
+    auth: {
+        clientId: clientId,
+        authority: `https://login.microsoftonline.com/${tenantId}/v2.0`,
+        clientSecret: clientSecret1
+    },
+    system: {
+        loggerOptions: {
+            loggerCallback(loglevel, message, containsPii) {
+                console.log(message);
+            },
+            piiLoggingEnabled: false,
+            logLevel: msal.LogLevel.Verbose,
         }
     }
-);
+};
 
-// Starts listening on port 6000
-const port = process.env.PORT || 8080;
 
-app.listen(port, () => {
-    console.log('Listening on port ' + port);
+const pca = new msal.ConfidentialClientApplication(msalConfig);
+
+pca.acquireTokenByClientCredential({
+    scopes: scopes,
+}).then((response) => {
+    const accessToken = response.accessToken;
+
+    import('node-fetch').then((fetch) => {
+        fetch.default('https://graph.microsoft.com/v1.0/planner/plans/CCCDONX8PEW2r4pr-GsprpcABnhr/tasks', {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        })
+
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error(`Failed to fetch tasks: ${response.statusText}`);
+                }
+            })
+            .then(data => {
+                // Process the tasks data
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Error fetching tasks:', error);
+            });
+    }).catch((error) => {
+        console.error('Error importing fetch:', error);
+    });
+}).catch((error) => {
+    console.error('Error acquiring token:', error);
 });
+app.get('/tasks', async (req, res) => {
+    try {
+        const tasks = await client.api('/planner/plans/CCCDONX8PEW2r4pr-GsprpcABnhr/tasks').get();
+        res.json(tasks);
+    } catch (error) {
+        console.error('Error fetching tasks:', error);
+        res.status(500).json({ error: 'Failed to fetch tasks' });
+    }
+});
+const PORT = process.env.PORT || 3000;
+
+const server = app.listen(PORT, () => {
+    console.log('Server is running at http://localhost:3000/');
+});
+module.exports = server;
