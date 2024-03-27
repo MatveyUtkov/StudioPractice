@@ -7,7 +7,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // replace the value below with the Telegram token you receive from @BotFather
-const token = '7115234597:AAGs1wKG5YNXHrMkZqtuglfg86HrIe3ygC4';
+const token = 'token';
 // Create a bot that uses 'polling' to fetch new updates
 const bot = new TelegramBot(token, {polling: true});
 
