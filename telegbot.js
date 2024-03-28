@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 let tg = {
-    token: "7115234597:AAGs1wKG5YNXHrMkZqtuglfg86HrIe3ygC4",
+    token: "token",
     chat_id:"702119813"
 }
 const bot = new TelegramBot(tg.token, {polling: true});
