@@ -2,16 +2,30 @@
 <html>
 <head>
     <title>Contact Us</title>
+    <script>
+        function checkMessageLength() {
+            var message = document.getElementById("message").value;
+            var email = document.getElementById("email").value;
+            if (message.length < 10) {
+                alert("Message must be at least 10 characters long.");
+                return false;
+            }
+            if (email.indexOf("@") === -1) {
+                alert("Email address must contain the '@' character.");
+                return false; // Prevent form submission
+            }
+            return true;
+        }
+    </script>
 </head>
 <body>
 <h1>Contact Us</h1>
-<form action="/send-message" method="post">
-    <label for="name">Name:</label><br>
-    <input type="text" id="name" name="name" required><br><br>
+<form action="/send-message" method="post" onsubmit="return checkMessageLength()">
     <label for="email">Email:</label><br>
     <input type="email" id="email" name="email" required><br><br>
     <label for="message">Message:</label><br>
     <textarea id="message" name="message" required></textarea><br><br>
+
     <input type="submit" value="Send">
 </form>
 </body>
