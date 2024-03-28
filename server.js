@@ -42,7 +42,7 @@ app.post('/send-email', (req, res) => {
         secure: false, // true for 465, false for other ports
         auth: {
             user: '211151@astanait.edu.kz',
-            pass: 'Kv4s_n0t_d3ad',
+            pass: 'password',
         },
     });
 
