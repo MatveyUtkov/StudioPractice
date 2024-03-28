@@ -6,7 +6,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-const token = '7115234597:AAGs1wKG5YNXHrMkZqtuglfg86HrIe3ygC4';
+const token = 'token';
 
 const bot = new TelegramBot(token, {polling: true});
 
